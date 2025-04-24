@@ -53,7 +53,7 @@ chmod +x backup.sh
 #!/bin/bash
 FROM="/home/$USER/"
 TO="/tmp/backup/"
-ISKL=".*"  # Исключаем скрытые файлы и директории
+ISKL=".*"  
 LOG_FILE="/var/log/backup.log"
 DATE=$(date +%Y-%m-%d_%H-%M-%S)
 mkdir -p "$TO"
@@ -75,6 +75,9 @@ crontab -e
 0 0 * * * /home/viktor/backup.sh
 ```
 **3. Скриншот работы скрипта **
+
 <img src="img/img2.jpg">
+
 **4. Файл crontab **
+
 <a href="crontab">crontab</a>
