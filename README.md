@@ -25,22 +25,12 @@
 
 ### Решение 1
 
-**1. Пункт 1**
+**1. Запускаем команду**
 ```
-код
+rsync -av --delete --checksum --exclude ".*" /home/$USER/ /tmp/backup/
 ```
-**2. Пункт 2**
-```
-код
-```
-**3. Код**
-```
-код
-```
-**4. Скриншот **
----
-**5. Конфиг**
----
+**2. Скриншот с командой и результатом выполнения **
+<img src="img/img1.jpg">
 
 ---
 
@@ -53,15 +43,38 @@
 5. `На проверку направить файл crontab и скриншот с результатом работы утилиты.`
 
 ### Решение 2
-**1. Пункт 1**
+**1. Создаем скрипт**
 ```
-код
+nano backup.sh
+chmod +x backup.sh
 ```
 **2. Пункт 2**
 ```
-код
+#!/bin/bash
+FROM="/home/$USER/"
+TO="/tmp/backup/"
+ISKL=".*"  # Исключаем скрытые файлы и директории
+LOG_FILE="/var/log/backup.log"
+DATE=$(date +%Y-%m-%d_%H-%M-%S)
+mkdir -p "$TO"
+rsync -av --delete --checksum --exclude "$ISKL" "$FROM" "$TO"
+if [ $? -eq 0 ]; then
+  logger -t backup_script "Backup complete to $TO in $DATE"
+  echo "Backup complete."
+else
+  logger -t backup_script "Error backup to $TO in $DATE"
+  echo "Backup error."
+  exit 1 
+fi
+
+exit 0 
 ```
-**3. Скриншот **
----
-**4. Конфиг **
----
+**3. Добавляем скрипт в crontab**
+```
+crontab -e
+0 0 * * * /home/viktor/backup.sh
+```
+**3. Скриншот работы скрипта **
+<img src="img/img2.jpg">
+**4. Файл crontab **
+<a href="crontab">crontab</a>
