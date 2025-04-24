@@ -48,7 +48,7 @@ rsync -av --delete --checksum --exclude ".*" /home/$USER/ /tmp/backup/
 nano backup.sh
 chmod +x backup.sh
 ```
-**2. Пункт 2**
+**2. Код скрипта**
 ```
 #!/bin/bash
 FROM="/home/$USER/"
