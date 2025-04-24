@@ -74,10 +74,10 @@ exit 0
 crontab -e
 0 0 * * * /home/viktor/backup.sh
 ```
-**3. Скриншот работы скрипта **
+**4. Скриншот работы скрипта **
 
 <img src="img/img2.jpg">
 
-**4. Файл crontab **
+**5. Файл crontab **
 
 <a href="crontab">crontab</a>
